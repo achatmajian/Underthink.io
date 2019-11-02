@@ -2,6 +2,13 @@ $(document).ready(function(){
 
     console.log("document is ready");
 
+    //We all need access to the Firebase
+    /*const config = {
+
+    }
+
+    firbase.initializeApp(config);*/
+
     $("#submitButton").on("click", function() {
         
         $("#displayBox").empty();
@@ -41,7 +48,7 @@ $(document).ready(function(){
                 moviePic.attr("alt", "title image");
                 
                 //display the title image
-                $("#displayBox").append(moviePic);
+                $("#titlesBox").append(moviePic);
                 console.log("displaying" + moviePic)
             }
             
