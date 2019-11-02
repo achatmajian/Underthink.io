@@ -94,7 +94,7 @@ $(document).ready(function(){
       password = $("#password-input").val().trim();
 
       // Code for "Setting values in the database"
-      database.ref().set({
+      database.ref("/user-data").set({
         firstName: firstName,
         lastName: lastName,
         userName: userName,
