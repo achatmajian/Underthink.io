@@ -1,0 +1,30 @@
+.brand-logo {
+    margin-left: 25px;
+}
+
+#card-container{
+display: grid;
+justify-items: center;
+align-items: center;
+height: 100px;
+
+}
+
+#movie-card{
+display: grid;
+justify-items: center;
+align-items: center;
+
+}
+
+.row .col {
+    float: none;
+    margin: 0 auto;
+    
+}
+
+#buttons{
+ margin: 0 auto;
+ 
+}
+
