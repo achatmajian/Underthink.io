@@ -1,65 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Underthink.io</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Underthink.io</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Our JavaScript file  -->
-    <script src="assets/javascript/app.js"></script>
+  <!-- Our JavaScript file  -->
+  <script src="assets/javascript/app.js"></script>
 
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+       https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
-
+  
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
 
 
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
 </head>
+
 <body>
-    <h1>Underthink.io</h1>
+  <h1>Underthink.io</h1>
 
 
-    <div class="container">
+  <div class="container">
 
-      <div class = "row" id = "movieRow">
-        <div class = "col-md-10" id = "titlesBox">
+    <div class="row" id="movieRow">
+      <div class="col-md-10" id="titlesBox">
 
-        </div>
       </div>
     </div>
+  </div>
 
-    <div class="row" id = "buttonsRow">
-      <button type="button" class="btn btn-default btn-lg" id = "likeButton">
-        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
-      </button>
-      <button type="button" class="btn btn-default btn-lg" id = "dislikeButton">
-        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Dislike
-      </button>
-      <button type="button" class="btn btn-default btn-lg" id = "loveButton">
-        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Love
-      </button>
+  <div class="row" id="buttonsRow">
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
+    </button>
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Dislike
+    </button>
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Love
+    </button>
+  </div>
+
+
+  <a class="waves-effect waves-light btn view" onclick="$('#modal1').modal('open');">Sign Up Now</a>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="first_name-input" type="text" class="validate">
+              <label for="first_name-input">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name-input" type="text" class="validate">
+              <label for="last_name-input">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="username-input" type="text" class="validate">
+              <label for="username-input">Username</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email-input" type="email" class="validate">
+              <label for="email-input">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password-input" type="password" class="validate">
+              <label for="password-input">Password</label>
+            </div>
+          </div>
+        </form>
+      </div>
+
     </div>
-        
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" id="sign_up">Sign Up!</a>
+    </div>
+  </div>
+  
 
-    
+
+
 </body>
+
 </html>
