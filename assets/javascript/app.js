@@ -110,8 +110,15 @@ $('#modal1').modal();
       email = $("#email-input").val().trim();
       password = $("#password-input").val().trim();
 
+      // database.ref(`users/${userId}/userName`).once("value", snapshot => {
+      //   if (snapshot.exists()){
+      //      console.log("exists!");
+      //      const userName = snapshot.val();
+      //    }
+      // });
+
       // Code for "Setting values in the database"
-      database.ref("/user-data").set({
+      database.ref("/user-data").push({
         firstName: firstName,
         lastName: lastName,
         userName: userName,
