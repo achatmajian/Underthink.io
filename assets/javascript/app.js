@@ -16,9 +16,22 @@ $(document).ready(function(){
     
       var database = firebase.database();
 
-    // console.log("document is ready");
+      //Functionality in the preliminary genre checkbox screen
+      var genreSelections = [];
 
+    //read checkboxes and push values into genreSelections array
+        $(".checks").on("click", function(){
+          var x = $(this).attr("value");
+          genreSelections.push(x);
+          console.log(genreSelections)
+        })
 
+        //PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
+        // $("#formSubmit").on("click", function(){
+
+        // })
+
+      //this is just a click function to check the queries.  Will remove later
     $("#likeButton").on("click", function() {
         
         $("#titlesBox").empty();
@@ -29,6 +42,7 @@ $(document).ready(function(){
         function callSearch() {
          
         var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
+        var randomizer  = Math.floor(Math.random() * 20);
         var genreChoice = ["18"];
         //setting for running the query in the API
         var settings = {
@@ -46,9 +60,11 @@ $(document).ready(function(){
          
           var results = response.results;
             //iterate through all available titles and get path to title image
-            for (var i = 0; i < results.length; i++){
-                var picURL = "https://image.tmdb.org/t/p/w500" + results[i].poster_path;
+            //for (var i = 0; i < results.length; i++){
+                var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path;
+                var moviePlot = results[randomizer].overview;
                 console.log("picURL = " + picURL);
+                console.log(moviePlot);
                 var moviePic = $("<img>");
 
                 moviePic.attr("src", picURL);
@@ -57,24 +73,25 @@ $(document).ready(function(){
                 //display the title image
 
                 $("#titlesBox").append(moviePic);
-
+                $("#titlesBox").append(moviePlot);
 
 
                 console.log("displaying" + moviePic)
-            }
+            //}
              });
 
         
     }
     })
-
+    
+   
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
   $('.view').click(function (){
   	$('#modal1').modal('open');	
   	// alert('edskjcxnm');
   });
 //   $('.view').leanModal();
-  $('#modal1').modal();
+$('#modal1').modal();
 
   var firstName = "";
   var lastName = "";
