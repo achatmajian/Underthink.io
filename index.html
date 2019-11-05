@@ -27,80 +27,131 @@
 
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Materialize Icons-->
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
        https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
-  
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
 
 
 </head>
 
 <body>
-  <h1>Underthink.io</h1>
+  <!-- Dropdown Structure -->
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">three</a></li>
+  </ul>
+  <nav>
+    <div class="nav-wrapper purple darken-2">
+      <a href="#!" class="brand-logo">Underthink</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="sass.html">Discover</a></li>
+        <li><a href="badges.html">Saved</a></li>
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Profile<i
+              class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <div>
+    </br>
+    </br>
+    </br>
+  </div>
 
 
   <div class="container">
 
-    <div class="row" id="movieRow">
-      <div class="col-md-10" id="titlesBox">
-
-      </div>
-    </div>
-  </div>
-
-
-  <a class="waves-effect waves-light btn view" onclick="$('#modal1').modal('open');">Sign Up Now</a>
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-
-      <div class="row">
-        <form class="col s12">
+    <div class="row" style="text-align: center;">
+      <div class="col s3">
+        <!-- Image Card -->
+        <div id="card-container">
           <div class="row">
-            <div class="input-field col s6">
-              <input id="first_name-input" type="text" class="validate">
-              <label for="first_name-input">First Name</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="last_name-input" type="text" class="validate">
-              <label for="last_name-input">Last Name</label>
+            <div class="col s12 m7" id="movie-card">
+              <div class="card">
+                <div class="card-image">
+                  <img class="center" style="width:300px;" src="assets/logo/underthinkv3.png">
+                </div>
+                <div class="card-content">
+                  <p>text about underthink</p>
+                </div>
+                <div class="card-action" id="buttons">
+                  <a class="waves-effect waves-light btn purple darken-2" style="color: white;" id="sign-in-button">Sign
+                    In</a>
+                  <a class="waves-effect waves-light btn purple darken-2" style="color: white;"
+                    onclick="$('#modal1').modal('open');">Sign Up Now</a>
+                  <!-- Modal Structure -->
+                  <div id="modal1" class="modal">
+                    <div class="modal-content">
+
+                      <div class="row">
+                        <form class="col s12">
+                          <div class="row">
+                            <div class="input-field col s6">
+                              <input id="first_name-input" type="text" class="validate">
+                              <label for="first_name-input">First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                              <input id="last_name-input" type="text" class="validate">
+                              <label for="last_name-input">Last Name</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="username-input" type="text" class="validate">
+                              <label id="username-label" for="username-input">Username</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="email-input" type="email" class="validate">
+                              <label for="email-input">Email</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="password-input" type="password" class="validate">
+                              <label for="password-input">Password</label>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#!" class=" modal-action waves-effect waves-green btn-flat" id="sign_up">Sign Up!</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="username-input" type="text" class="validate">
-              <label id="username-label" for="username-input">Username</label>
-            </div>
+          <div>
+            <!-- Image Card Close -->
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="email-input" type="email" class="validate">
-              <label for="email-input">Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password-input" type="password" class="validate">
-              <label for="password-input">Password</label>
-            </div>
-          </div>
-        </form>
-      </div>
+        </div>
 
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action waves-effect waves-green btn-flat" id="sign_up">Sign Up!</a>
-    </div>
-  </div>
-  
+
+
+
+
 
 
 
