@@ -41,7 +41,9 @@ $(document).ready(function(){
         callSearch();
     
         //function to initiate search based on query parameters/input
-        function callSearch() {
+        
+    })
+    function callSearch() {
          
         var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
         var randoms = Math.floor(Math.random() * genreSelections.length)
@@ -75,8 +77,6 @@ $(document).ready(function(){
 
         
     }
-    })
-    
    
 
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
