@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+
+    <title>Underthink.io</title>
 
     <!-- Compiled and minified CSS (Materialize)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+    <!-- Materialize Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!-- Compiled and minified CSS (Materialize)-->
     <link rel="stylesheet" href="style.css">
 
-    <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <!-- Compiled and minified JavaScript (Materialize) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script type="text/javascript" src="assets/javascript/app.js"></script>
 
@@ -28,8 +32,65 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+
 </head>
+
 <body>
-    
+
+    <!-- Nav Bar -->
+    <div class="nav-container">
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">Discover</a></li>
+            <li><a href="#!">Saved</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Profile</a></li>
+        </ul>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">Underthink.io</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="sass.html">Discover</a></li>
+                    <li><a href="badges.html">Saved</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Profile<i
+                                class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div> <!-- Nav Bar Close -->
+
+    <!-- Image Card -->
+    <div id="card-container">
+  <div class="col s12 m7">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg">
+          </div>
+          <div class="card-stacked" id="horiz-card">
+            <div class="card-content">
+            <h3 id="movie-title">Avengers: Endgame</h3>
+            <table style="width:30%">
+                <tr>
+                    <td><p id="movie-rating"><strong>PG-13</strong></p></td>
+                    <td><p id="movie-year"><strong>2019</strong></p></td>
+                    <td><p id="movie-genre"><strong>Sci-Fi</strong></p></td>
+                    <td><p id="movie-runtime"><strong>3h 1m</strong></p></td>
+                </tr>
+            </table>
+            <p id="movie-description">Adrift in space with no food or water, Tony Stark sends a message to Pepper Potts as his oxygen supply starts to dwindle. Meanwhile, the remaining Avengers -- Thor, Black Widow, Captain America and Bruce Banner -- must figure out a way to bring back their vanquished allies for an epic showdown with Thanos -- the evil demigod who decimated the planet and the universe.</p>
+            </div>
+            <div class="card-action">
+                <a class="waves-effect waves-light btn" id="button">Where To Watch</a>
+                <a class="waves-effect waves-light btn" id="button">Add To Saved</a>
+            </div>
+          </div>
+        </div>
+      </div>
+                
+    <div><!-- Image Card Close -->
+
+
+
+
 </body>
 </html>
