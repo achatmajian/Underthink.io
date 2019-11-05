@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Underthink</title>
+
+    <!-- css -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Materialize Icons-->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+</head>
+
+<body>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">one</a></li>
+        <li><a href="#!">two</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">three</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper purple darken-2">
+            <a href="#!" class="brand-logo">Underthink</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="sass.html">Discover</a></li>
+                <li><a href="badges.html">Saved</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Profile<i
+                            class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        </br>
+        </br>
+        </br>
+    </div>
+
+    <div class="container">
+        <div class="row" style="text-align: center;">
+            <div class="col s12">
+                <a class="waves-effect waves-light btn purple darken-2" id="love-saved-button">love</a>
+                <a class="waves-effect waves-light btn purple darken-2" id="like-saved-button">like</a>
+                <a class="waves-effect waves-light btn purple darken-2" id="watched-saved-button">watched</a>
+            </div>
+        </div>
+
+        <div class="row" style="text-align: center;">
+            <div class="col s3">
+                <div class="card" id="saved-movie">
+                    <div class="card-image">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
