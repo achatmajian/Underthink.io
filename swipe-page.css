@@ -35,37 +35,13 @@ align-items: center;
 }
 
 
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }
 
 .card {
     width:100%;
     
    }
 
-img {
-    height: 400px;
-    width: 400px;
-}
 
 #arrows{
     font-size: 60px;
 }
-
-/* Movie Details Page Styling */
-
-
-.card {
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    margin-top: 30px;
-    margin-left: 50px;
-   
-    width: 90%; 
-}
-
