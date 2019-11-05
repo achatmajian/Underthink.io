@@ -85,13 +85,14 @@ $(document).ready(function(){
     })
     
    
+
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-  $('.view').click(function (){
-  	$('#modal1').modal('open');	
-  	// alert('edskjcxnm');
+  $('.view').click(function () {
+    $('#modal1').modal('open');
   });
-//   $('.view').leanModal();
-$('#modal1').modal();
+
+  $('#modal1').modal();
+
 
   var firstName = "";
   var lastName = "";
@@ -99,34 +100,42 @@ $('#modal1').modal();
   var email = "";
   var password = "";
 
-  $("#sign_up").click(function(){
-   
-      event.preventDefault();
+  $("#sign_up").click(function () {
 
-      // Grabbed values from text-boxes
-      firstName = $("#first_name-input").val().trim();
-      lastName = $("#last_name-input").val().trim();
-      userName = $("#username-input").val().trim();
-      email = $("#email-input").val().trim();
-      password = $("#password-input").val().trim();
+    event.preventDefault();
 
-      // database.ref(`users/${userId}/userName`).once("value", snapshot => {
-      //   if (snapshot.exists()){
-      //      console.log("exists!");
-      //      const userName = snapshot.val();
-      //    }
-      // });
+    // Grabbed values from text-boxes
+    firstName = $("#first_name-input").val().trim();
+    lastName = $("#last_name-input").val().trim();
+    userName = $("#username-input").val().trim();
+    email = $("#email-input").val().trim();
+    password = $("#password-input").val().trim();
 
-      // Code for "Setting values in the database"
-      database.ref("/user-data").push({
-        firstName: firstName,
-        lastName: lastName,
-        userName: userName,
-        email: email,
-        password: password,
-      });
+    database.ref("/user-data/").once("value", snapshot => {
+      if (snapshot.child(userName).exists()) {
+        console.log("exists!");
+        console.log(userName)
+        $("#username-input").css("color","red")
+        $("#username-label").css("color","red")
+        $("#username-label").text("username already in use")
+      }
+      else {
+        // Code for "Setting values in the database"
+        database.ref("/user-data/" + userName).set({
+          firstName: firstName,
+          lastName: lastName,
+          userName: userName,
+          email: email,
+          password: password,
+        });
+
+        $("#modal1").modal("close")
+
+      }
 
     });
-  })
-    
+
+  });
+})
+
 
