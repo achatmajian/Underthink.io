@@ -1,3 +1,5 @@
+/* Swipe Page Styling */
+
 .brand-logo {
     margin-left: 25px;
 }
@@ -6,7 +8,7 @@
 display: grid;
 justify-items: center;
 align-items: center;
-height: 100px;
+
 
 }
 
@@ -24,7 +26,20 @@ align-items: center;
 }
 
 #buttons{
- margin: 0 auto;
+ display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, 180px);
+  align-items: center;
+  
  
 }
 
+.card {
+    width:100%;
+    
+   }
+
+
+#arrows{
+    font-size: 60px;
+}
