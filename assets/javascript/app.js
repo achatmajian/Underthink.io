@@ -42,11 +42,8 @@ $(".dropdown-trigger").dropdown();
     $("#likeButton").on("click", function() {
         $("#posterDisplay").empty();
         $("#moviePlot").empty();
-<<<<<<< HEAD
-=======
         $("#card-title").empty();
         console.log("clicked");
->>>>>>> ef8509d2eb22c5b4a10ffed2f7906f5d916869a9
 
         callSearch();
     
@@ -62,15 +59,6 @@ $(".dropdown-trigger").dropdown();
         
         //setting for running the query in the API
         var settings = {
-<<<<<<< HEAD
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.themoviedb.org/3/discover/movie?with_genres=18" + /*genreSelections[randoms]+*/ "&api_key=" + apiKey,
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-          }
-=======
           "async": true,
           "crossDomain": true,
           "url": "https://api.themoviedb.org/3/discover/movie?with_genres=18&api_key=" + apiKey,
@@ -78,15 +66,11 @@ $(".dropdown-trigger").dropdown();
           "headers": {},
           "data": "{}"
         }
->>>>>>> ef8509d2eb22c5b4a10ffed2f7906f5d916869a9
 
           
           $.ajax(settings).done(function (response) {
             console.log (response);
-<<<<<<< HEAD
-=======
             console.log("Working")
->>>>>>> ef8509d2eb22c5b4a10ffed2f7906f5d916869a9
          
           var results = response.results;
                 var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path;
@@ -101,9 +85,6 @@ $(".dropdown-trigger").dropdown();
 
                 $("#posterDisplay").append(moviePic);
                 $("#moviePlot").append(moviePlot);
-<<<<<<< HEAD
-             });
-=======
                 $("#card-title").append(movieTitle);
 
                 var getIMDBsettings = {
@@ -145,18 +126,15 @@ $(".dropdown-trigger").dropdown();
                 });
             
           });
->>>>>>> ef8509d2eb22c5b4a10ffed2f7906f5d916869a9
     }
    
 
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
   $('.view').click(function () {
     $('#modal1').modal('open');
-    $('#modal2').modal('open');
   });
 
   $('#modal1').modal();
-  $('#modal2').modal();
 
 
   var firstName = "";
@@ -165,47 +143,6 @@ $(".dropdown-trigger").dropdown();
   var email = "";
   var password = "";
 
-  // On click log in button, checks to make sure user in the in the system
-  // Checks credentials
-  $("#log_in").click(function(){
-    userNameLogin = $("#username-input").val().trim();
-    passwordLogin = $("#password-input").val().trim();
-
-    // console.log(userNameLogin)
-    // console.log(passwordLogin)
-
-    var ref = database.ref("/user-data/");
-    ref.once("value").then(function(snapshot){
-      var a = snapshot.child(userNameLogin).exists();
-      console.log(a)
-      // if(a){
-      //   firebase.database().ref("/user-data/"+userNameLogin).once("value").then(function(snapshot){
-      //     var b = snapshot.child("userName").val();
-      //     var c = snapshot.child("password").val();
-      //     console.log(b);
-      //     console.log(c);
-      //     // if(b === userNameLogin && c === passwordLogin){
-      //     //   alert("YOUVE SIGNED IN")
-      //     // }
-      //   })
-      // }
-      // else if(!a){
-      //   $("#username-login-input").css("color","red")
-      //   $("#username-login-label").css("color","red")
-      //   $("#username-login-label").text("username does not exist")
-      // }
-    })
-
-    // database.ref("/user-data").child(userName).snapshot
-
-    // if (database.ref("/user-data").child(userName).equalTo(userNameLogin)) {
-    //   alert("YOU'VE SIGNED IN!")
-    // }
-    
-  })
-
-
-  // On click sign up button, pushes user info to Firebase DB
   $("#sign_up").click(function () {
 
     event.preventDefault();
@@ -217,7 +154,6 @@ $(".dropdown-trigger").dropdown();
     email = $("#email-input").val().trim();
     password = $("#password-input").val().trim();
 
-    // Does not allow for sign up if the username is alredy in use
     database.ref("/user-data/").once("value", snapshot => {
       if (snapshot.child(userName).exists()) {
         console.log("exists!");
