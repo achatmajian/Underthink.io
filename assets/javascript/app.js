@@ -37,6 +37,8 @@ $(document).ready(function(){
         
       //this is just a click function to check the queries.  Will remove later
     $("#likeButton").on("click", function() {
+        $("#posterDisplay").empty();
+        $("#moviePlot").empty();
 
         callSearch();
     
@@ -48,11 +50,12 @@ $(document).ready(function(){
         var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
         var randoms = Math.floor(Math.random() * genreSelections.length)
         var randomizer  = Math.floor(Math.random() * 20);
+        
         //setting for running the query in the API
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + genreSelections[randoms]+ "&api_key=" + apiKey,
+            "url": "https://api.themoviedb.org/3/discover/movie?with_genres=18" + /*genreSelections[randoms]+*/ "&api_key=" + apiKey,
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -60,22 +63,19 @@ $(document).ready(function(){
 
           
           $.ajax(settings).done(function (response) {
-            console.log(response);
+            console.log (response);
          
           var results = response.results;
                 var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path;
                 var moviePlot = results[randomizer].overview;
-                console.log("picURL = " + picURL);
-                console.log(moviePlot);
                 var moviePic = $("<img>");
 
                 moviePic.attr("src", picURL);
                 moviePic.attr("alt", "title image");
-                console.log("displaying" + moviePic)
 
+                $("#posterDisplay").append(moviePic);
+                $("#moviePlot").append(moviePlot);
              });
-
-        
     }
    
 
