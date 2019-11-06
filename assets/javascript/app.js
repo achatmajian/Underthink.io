@@ -148,32 +148,33 @@ $(".dropdown-trigger").dropdown();
   // On click log in button, checks to make sure user in the in the system
   // Checks credentials
   $("#log_in").click(function(){
-    userNameLogin = $("#username-input").val().trim();
-    passwordLogin = $("#password-input").val().trim();
+    userNameLogin = $("#username-login-input").val().trim();
+    passwordLogin = $("#password-login-input").val().trim();
 
-    // console.log(userNameLogin)
+    console.log(userNameLogin)
     // console.log(passwordLogin)
 
-    var ref = database.ref("/user-data/");
+    var ref = database.ref("/user-data");
     ref.once("value").then(function(snapshot){
+      console.log(userNameLogin)
       var a = snapshot.child(userNameLogin).exists();
       console.log(a)
-      // if(a){
-      //   firebase.database().ref("/user-data/"+userNameLogin).once("value").then(function(snapshot){
-      //     var b = snapshot.child("userName").val();
-      //     var c = snapshot.child("password").val();
-      //     console.log(b);
-      //     console.log(c);
-      //     // if(b === userNameLogin && c === passwordLogin){
-      //     //   alert("YOUVE SIGNED IN")
-      //     // }
-      //   })
-      // }
-      // else if(!a){
-      //   $("#username-login-input").css("color","red")
-      //   $("#username-login-label").css("color","red")
-      //   $("#username-login-label").text("username does not exist")
-      // }
+      if(a){
+        firebase.database().ref("/user-data/"+userNameLogin).once("value").then(function(snapshot){
+          var b = snapshot.child("userName").val();
+          var c = snapshot.child("password").val();
+          console.log(b);
+          console.log(c);
+          if(b === userNameLogin && c === passwordLogin){
+            alert("YOUVE SIGNED IN")
+          }
+        })
+      }
+      else if(!a){
+        $("#username-login-input").css("color","red")
+        $("#username-login-label").css("color","red")
+        $("#username-login-label").text("username does not exist")
+      }
     })
 
     // database.ref("/user-data").child(userName).snapshot
