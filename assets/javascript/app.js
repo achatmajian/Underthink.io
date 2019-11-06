@@ -132,9 +132,11 @@ $(".dropdown-trigger").dropdown();
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
   $('.view').click(function () {
     $('#modal1').modal('open');
+    $('#modal2').modal('open');
   });
 
   $('#modal1').modal();
+  $('#modal2').modal();
 
 
   var firstName = "";
@@ -143,6 +145,47 @@ $(".dropdown-trigger").dropdown();
   var email = "";
   var password = "";
 
+  // On click log in button, checks to make sure user in the in the system
+  // Checks credentials
+  $("#log_in").click(function(){
+    userNameLogin = $("#username-input").val().trim();
+    passwordLogin = $("#password-input").val().trim();
+
+    // console.log(userNameLogin)
+    // console.log(passwordLogin)
+
+    var ref = database.ref("/user-data/");
+    ref.once("value").then(function(snapshot){
+      var a = snapshot.child(userNameLogin).exists();
+      console.log(a)
+      // if(a){
+      //   firebase.database().ref("/user-data/"+userNameLogin).once("value").then(function(snapshot){
+      //     var b = snapshot.child("userName").val();
+      //     var c = snapshot.child("password").val();
+      //     console.log(b);
+      //     console.log(c);
+      //     // if(b === userNameLogin && c === passwordLogin){
+      //     //   alert("YOUVE SIGNED IN")
+      //     // }
+      //   })
+      // }
+      // else if(!a){
+      //   $("#username-login-input").css("color","red")
+      //   $("#username-login-label").css("color","red")
+      //   $("#username-login-label").text("username does not exist")
+      // }
+    })
+
+    // database.ref("/user-data").child(userName).snapshot
+
+    // if (database.ref("/user-data").child(userName).equalTo(userNameLogin)) {
+    //   alert("YOU'VE SIGNED IN!")
+    // }
+    
+  })
+
+
+  // On click sign up button, pushes user info to Firebase DB
   $("#sign_up").click(function () {
 
     event.preventDefault();
@@ -154,6 +197,7 @@ $(".dropdown-trigger").dropdown();
     email = $("#email-input").val().trim();
     password = $("#password-input").val().trim();
 
+    // Does not allow for sign up if the username is alredy in use
     database.ref("/user-data/").once("value", snapshot => {
       if (snapshot.child(userName).exists()) {
         console.log("exists!");
