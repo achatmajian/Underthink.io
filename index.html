@@ -88,11 +88,38 @@
                   <p>text about underthink</p>
                 </div>
                 <div class="card-action" id="buttons">
-                  <a class="waves-effect waves-light btn purple darken-2" style="color: white;" id="sign-in-button">Sign
+                  <a class="waves-effect waves-light btn purple darken-2" style="color: white;" onclick="$('#modal2').modal('open');" id="log-in-button">Log
                     In</a>
                   <a class="waves-effect waves-light btn purple darken-2" style="color: white;"
                     onclick="$('#modal1').modal('open');">Sign Up Now</a>
-                  <!-- Modal Structure -->
+                  
+                    <!-- Log In Modal -->
+                    <div id="modal2" class="modal">
+                      <div class="modal-content">
+  
+                        <div class="row">
+                          <form class="col s12">
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <input id="username-login-input" type="text" class="validate">
+                                <label for="username-login-input" id="username-login-label">Username</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <input id="password-login-input" type="password" class="validate">
+                                <label for="password-login-input">Password</label>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+  
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#!" class=" modal-action waves-effect waves-green btn-flat" id="log_in">Log In</a>
+                      </div>
+                    </div>
+                    <!-- Sign Up Modal -->
                   <div id="modal1" class="modal">
                     <div class="modal-content">
 
