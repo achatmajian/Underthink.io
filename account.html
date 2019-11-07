@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Underthink</title>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+    <!-- css -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- our CSS -->
+    <link rel="stylesheet" href="account.css">
+
+    <!-- Materialize Icons-->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+
+
+
+
+</head>
+
+<body>
+    <!-- Dropdown Structure -->
+
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="account.html">Account</a></li>
+        <li><a href="#!">Sign Out</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper purple darken-2">
+            <a href="#!" class="brand-logo">Underthink</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="swipe-page.html">Discover</a></li>
+                <li><a href="savedmovies.html">Saved</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Profile<i
+                            class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        </br>
+        </br>
+        </br>
+    </div>
+
+    <div class="container">
+        <div class="row center">
+            <div class="col s12 m8 l8">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title" style="text-align: center;">My Account</span>
+                        <table>
+                            <thead>
+
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td><b>Username</b></td>
+                                    <td id="fullName">ChrisTucker</td>
+                                    <td><a class="waves-effect waves-light btn purple darken-2 buttonFormat"
+                                            id="usernameButton">Update
+                                            </a></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Name</b></td>
+                                    <td id="fullName">Chris Tucker</td>
+                                    <td><a class="waves-effect waves-light btn purple darken-2 buttonFormat"
+                                            id="nameButton">Update
+                                            </a></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Email</b></td>
+                                    <td id="email">christucker@gmail.com</td>
+                                    <td><a class="waves-effect waves-light btn purple darken-2 buttonFormat"
+                                            id="emailButton">Update
+                                            </a></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Password</b></td>
+                                    <td>Rushhour2</td>
+                                    <td><a class="waves-effect waves-light btn purple darken-2 buttonFormat"
+                                            id="passwordButton">Update
+                                            </a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
