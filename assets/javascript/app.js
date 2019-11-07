@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
   $(".dropdown-trigger").dropdown();
@@ -20,6 +19,7 @@ $(document).ready(function () {
   var database = firebase.database();
 
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+
   $('.view').click(function () {
     $('#modal1').modal('open');
     $('#modal2').modal('open');
@@ -119,10 +119,23 @@ $(document).ready(function () {
           userName: userName,
           email: email,
           password: password,
-        });
+		});
+		
+		$("#modal1").modal("close");
+		window.location.href = "checkbox.html"
+		
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-        $("#modal1").modal("close");
-        window.location.href = "checkbox.html"
+            // Store the username as a cookie using "document.cookie"
+            document.cookie = "username=" + userName + ";";
+
+            // Print all the cookies
+            console.log(userName);
+            console.log(document.cookie);
+
+            // Recover the name by passing the cookie list through a function that breaks it down
+            var cookieName = readCookie("username");
+            console.log(cookieName); 
 
       }
 
@@ -130,129 +143,129 @@ $(document).ready(function () {
 
   });
 
-  //Signout
+   //Signout
   $("#signOut").click(function () {
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   })
   
-  //Functionality in the preliminary genre checkbox screen
-  var genreSelections = [];
-  var savedMovies = [];
+	//Functionality in the preliminary genre checkbox screen
+	var genreSelections = [];
+	var savedMovies = [];
 
-  //read checkboxes and push values into genreSelections array
-  $(".checks").on("click", function () {
-    var x = $(this).attr("value");
-    genreSelections.push(x);
-  })
+	//read checkboxes and push values into genreSelections array
+	$(".checks").on("click", function () {
+		console.log("Is this working?")
+		var x = $(this).attr("value");
+		genreSelections.push(x);
+	})
 
-  //PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
-  $("#formSubmit").on("click", function () {
-    database.ref("/user-data/" + userName + "/genreselections").set({
-      genreSelections: genreSelections
-    })
-  })
+	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
+	$("#formSubmit").on("click", function () {
+		var userCookie = readCookie("username")
+		console.log(userCookie)
+		database.ref("/user-data/" + userCookie + "/genreselections").set({
+			genreSelections: genreSelections
+		})
+	})
 
-  callSearch();
-
-
-
-  //function to initiate search based on query parameters/input
-  function callSearch() {
-    $("#posterDisplay").empty();
-    $("#moviePlot").empty();
-    $("#card-title").empty();
-
-    console.log("Function called")
-
-    var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
-    var randoms = Math.floor(Math.random() * genreSelections.length)
-    var randomizer = Math.floor(Math.random() * 20);
-
-    //setting for running the query in the API
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=18&api_key=" + apiKey,
-      "method": "GET",
-      "headers": {},
-      "data": "{}"
-    }
-
-
-    $.ajax(settings).done(function (response) {
-
-      var results = response.results;
-
-      var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path;
-      var moviePlot = results[randomizer].overview;
-      var moviePic = $("<img>");
-      var movieTitle = results[randomizer].original_title;
-      var movieID = results[randomizer].id;
-      console.log(results[randomizer])
-      moviePic.attr("src", picURL);
-      moviePic.attr("alt", "title image");
-
-      setResults(results[randomizer]);
-
-      $("#posterDisplay").append(moviePic);
-      $("#moviePlot").append(moviePlot);
-      $("#card-title").append(movieTitle);
-
-      var getIMDBsettings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
-        "method": "GET",
-        "headers": {},
-        "data": "{}"
-      }
-
-      $.ajax(getIMDBsettings).done(function (imdbResponse) {
-
-        var imdbID = imdbResponse.imdb_id;
-
-        var metacriticSettings = {
-          "async": true,
-          "crossDomain": true,
-          "url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
-          "method": "GET",
-          "headers": {
-            "x-rapidapi-host": "imdb8.p.rapidapi.com",
-            "x-rapidapi-key": "ea8d56c7demsh58a2de9c820070ap1858acjsnec3bd46c160d"
-          }
-        }
-
-        $.ajax(metacriticSettings).done(function (metacriticResponse) {
-          var metascore = metacriticResponse.metaScore;
-          var reviewCount = metacriticResponse.reviewCount;
-          var userScore = metacriticResponse.userScore;
-          var userRatingCount = metacriticResponse.userRatingCount
-
-        });
-
-      });
+	callSearch();
 
 
 
+	//function to initiate search based on query parameters/input
+	function callSearch() {
+		$("#posterDisplay").empty();
+		$("#moviePlot").empty();
+		$("#card-title").empty();
 
-    });
+		console.log("Function called")
 
-  }
-  //Like a movie and save it for later
-  $("#likeButton").on("click", function () {
+		var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
+		var randoms = Math.floor(Math.random() * genreSelections.length)
+		var randomizer = Math.floor(Math.random() * 20);
 
-    saveMovie(getResult());
-    console.log(savedMovies);
+		//setting for running the query in the API
+		var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": "https://api.themoviedb.org/3/discover/movie?with_genres=18&api_key=" + apiKey,
+			"method": "GET",
+			"headers": {},
+			"data": "{}"
+		}
 
-    callSearch();
-  })
 
-  function saveMovie(movie) {
-    savedMovies.push(movie);
-  }
-  function setResults(results) {
-    globalResult = results;
-  }
+		$.ajax(settings).done(function (response) {
+			
+			var results = response.results;
+			
+			var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path;
+			var moviePlot = results[randomizer].overview;
+			var moviePic = $("<img>");
+			var movieTitle = results[randomizer].original_title;
+			var movieID = results[randomizer].id;
+			console.log(results[randomizer])
+			moviePic.attr("src", picURL);
+			moviePic.attr("alt", "title image");
+
+			setResults(results[randomizer]);
+
+			$("#posterDisplay").append(moviePic);
+			$("#moviePlot").append(moviePlot);
+			$("#card-title").append(movieTitle);
+
+			var getIMDBsettings = {
+				"async": true,
+				"crossDomain": true,
+				"url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
+				"method": "GET",
+				"headers": {},
+				"data": "{}"
+			}
+
+			$.ajax(getIMDBsettings).done(function (imdbResponse) {
+
+				var imdbID = imdbResponse.imdb_id;
+
+				var metacriticSettings = {
+					"async": true,
+					"crossDomain": true,
+					"url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
+					"method": "GET",
+					"headers": {
+						"x-rapidapi-host": "imdb8.p.rapidapi.com",
+						"x-rapidapi-key": "ea8d56c7demsh58a2de9c820070ap1858acjsnec3bd46c160d"
+					}
+				}
+
+				$.ajax(metacriticSettings).done(function (metacriticResponse) {
+					var metascore = metacriticResponse.metaScore;
+					var reviewCount = metacriticResponse.reviewCount;
+					var userScore = metacriticResponse.userScore;
+					var userRatingCount = metacriticResponse.userRatingCount
+
+				});
+
+			});
+
+		});
+
+	}
+		//Like a movie and save it for later
+			$("#likeButton").on("click", function () {
+
+				saveMovie(getResult());
+				console.log(savedMovies);
+
+				callSearch();
+			})
+
+	function saveMovie(movie){
+		savedMovies.push(movie);
+	}
+	function setResults(results) {
+		globalResult = results;
+	}
 
   function getResult() {
     return globalResult;
@@ -262,5 +275,3 @@ $(document).ready(function () {
 
 
 })
-
-
