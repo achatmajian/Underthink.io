@@ -1,4 +1,4 @@
-/* Swipe Page Styling */
+/* Index Page Styling */
 
 .brand-logo {
     margin-left: 25px;
@@ -12,12 +12,6 @@ align-items: center;
 
 }
 
-#movie-card{
-display: grid;
-justify-items: center;
-align-items: center;
-
-}
 
 .row .col {
     float: none;
@@ -26,8 +20,11 @@ align-items: center;
 }
 
 #buttons{
- display: flex;
- align-items: center;
+ display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, 180px);
+  align-items: center;
+  margin: auto;
   
  
 }
@@ -38,8 +35,7 @@ align-items: center;
    }
 
 
-#arrows{
-    font-size: 60px;
+
+.center {
+    align-items: center;
 }
-
-
