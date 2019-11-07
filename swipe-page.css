@@ -5,7 +5,7 @@
 }
 
 #card-container{
-display: grid;
+display: flex;
 justify-items: center;
 align-items: center;
 
@@ -13,7 +13,7 @@ align-items: center;
 }
 
 #movie-card{
-display: grid;
+display: flex;
 justify-items: center;
 align-items: center;
 
@@ -27,16 +27,17 @@ align-items: center;
 
 #buttons{
  display: flex;
- align-items: center;
+
+ justify-content: space-evenly;
+  align-items: center;
+
   
  
 }
 
-.card {
-    width:100%;
-    
-   }
-
+.card{
+    margin: 30px;
+}
 
 #arrows{
     font-size: 60px;
