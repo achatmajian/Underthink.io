@@ -8,14 +8,13 @@
 display: flex;
 justify-items: center;
 align-items: center;
-
-
 }
 
 #movie-card{
 display: flex;
 justify-items: center;
 align-items: center;
+height: auto;
 
 }
 
@@ -36,6 +35,9 @@ align-items: center;
 
 .card{
     margin: 30px;
+    max-width: 100%;
+    height: auto;
+
 }
 
 #arrows{
