@@ -18,6 +18,97 @@ $(".dropdown-trigger").dropdown();
     
       var database = firebase.database();
 
+       // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+  $('.view').click(function () {
+    $('#modal1').modal('open');
+    $('#modal2').modal('open');
+  });
+
+  $('#modal1').modal();
+  $('#modal2').modal();
+
+
+  var firstName = "";
+  var lastName = "";
+  var userName = "";
+  var email = "";
+  var password = "";
+
+  // On click log in button, checks to make sure user in the in the system
+  // Checks credentials
+  $("#log_in").click(function(){
+    userNameLogin = $("#username-login-input").val().trim();
+    passwordLogin = $("#password-login-input").val().trim();
+
+    console.log(userNameLogin)
+    // console.log(passwordLogin)
+
+    var ref = database.ref("/user-data");
+    ref.once("value").then(function(snapshot){
+      console.log(userNameLogin)
+      var a = snapshot.child(userNameLogin).exists();
+      console.log(a)
+      if(a){
+        firebase.database().ref("/user-data/"+userNameLogin).once("value").then(function(snapshot){
+          var b = snapshot.child("userName").val();
+          var c = snapshot.child("password").val();
+          console.log(b);
+          console.log(c);
+          if(b === userNameLogin && c === passwordLogin){
+            alert("YOUVE SIGNED IN");
+            window.location.href = "swipe-page.html";
+          }
+        })
+      }
+      else if(!a){
+        $("#username-login-input").css("color","red")
+        $("#username-login-label").css("color","red")
+        $("#username-login-label").text("username does not exist")
+      }
+    })  
+  })
+
+
+  // On click sign up button, pushes user info to Firebase DB
+  $("#sign_up").click(function () {
+
+    event.preventDefault();
+
+    // Grabbed values from text-boxes
+    firstName = $("#first_name-input").val().trim();
+    lastName = $("#last_name-input").val().trim();
+    userName = $("#username-input").val().trim();
+    email = $("#email-input").val().trim();
+    password = $("#password-input").val().trim();
+
+    // Does not allow for sign up if the username is alredy in use
+    database.ref("/user-data/").once("value", snapshot => {
+      if (snapshot.child(userName).exists()) {
+        console.log("exists!");
+        console.log(userName)
+        $("#username-input").css("color","red")
+        $("#username-label").css("color","red")
+        $("#username-label").text("username already in use")
+      }
+      else {
+        // Code for "Setting values in the database"
+        database.ref("/user-data/" + userName).set({
+          firstName: firstName,
+          lastName: lastName,
+          userName: userName,
+          email: email,
+          password: password,
+        });
+
+        $("#modal1").modal("close");
+        window.location.href = "checkbox.html"
+
+      }
+
+    });
+
+  });
+
       //Functionality in the preliminary genre checkbox screen
       var genreSelections = [];
       var savedMovies = [];
@@ -31,7 +122,7 @@ $(".dropdown-trigger").dropdown();
 
         //PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
         $("#formSubmit").on("click", function(){
-          database.ref("/user-data/rayray/genreselections").set({
+          database.ref("/user-data/" + userName + "/genreselections").set({
             genreSelections: genreSelections
           })
         })
@@ -129,101 +220,8 @@ $(".dropdown-trigger").dropdown();
     }
    
 
-  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-  $('.view').click(function () {
-    $('#modal1').modal('open');
-    $('#modal2').modal('open');
-  });
-
-  $('#modal1').modal();
-  $('#modal2').modal();
-
-
-  var firstName = "";
-  var lastName = "";
-  var userName = "";
-  var email = "";
-  var password = "";
-
-  // On click log in button, checks to make sure user in the in the system
-  // Checks credentials
-  $("#log_in").click(function(){
-    userNameLogin = $("#username-login-input").val().trim();
-    passwordLogin = $("#password-login-input").val().trim();
-
-    console.log(userNameLogin)
-    // console.log(passwordLogin)
-
-    var ref = database.ref("/user-data");
-    ref.once("value").then(function(snapshot){
-      console.log(userNameLogin)
-      var a = snapshot.child(userNameLogin).exists();
-      console.log(a)
-      if(a){
-        firebase.database().ref("/user-data/"+userNameLogin).once("value").then(function(snapshot){
-          var b = snapshot.child("userName").val();
-          var c = snapshot.child("password").val();
-          console.log(b);
-          console.log(c);
-          if(b === userNameLogin && c === passwordLogin){
-            alert("YOUVE SIGNED IN")
-          }
-        })
-      }
-      else if(!a){
-        $("#username-login-input").css("color","red")
-        $("#username-login-label").css("color","red")
-        $("#username-login-label").text("username does not exist")
-      }
-    })
-
-    // database.ref("/user-data").child(userName).snapshot
-
-    // if (database.ref("/user-data").child(userName).equalTo(userNameLogin)) {
-    //   alert("YOU'VE SIGNED IN!")
-    // }
-    
-  })
-
-
-  // On click sign up button, pushes user info to Firebase DB
-  $("#sign_up").click(function () {
-
-    event.preventDefault();
-
-    // Grabbed values from text-boxes
-    firstName = $("#first_name-input").val().trim();
-    lastName = $("#last_name-input").val().trim();
-    userName = $("#username-input").val().trim();
-    email = $("#email-input").val().trim();
-    password = $("#password-input").val().trim();
-
-    // Does not allow for sign up if the username is alredy in use
-    database.ref("/user-data/").once("value", snapshot => {
-      if (snapshot.child(userName).exists()) {
-        console.log("exists!");
-        console.log(userName)
-        $("#username-input").css("color","red")
-        $("#username-label").css("color","red")
-        $("#username-label").text("username already in use")
-      }
-      else {
-        // Code for "Setting values in the database"
-        database.ref("/user-data/" + userName).set({
-          firstName: firstName,
-          lastName: lastName,
-          userName: userName,
-          email: email,
-          password: password,
-        });
-
-        $("#modal1").modal("close")
-
-      }
-
-    });
-
-  });
+ 
+  console.log(userName)
 })
 
 
