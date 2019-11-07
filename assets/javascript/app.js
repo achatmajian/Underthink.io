@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 
 $(".dropdown-trigger").dropdown();
@@ -118,10 +117,23 @@ $(".dropdown-trigger").dropdown();
           userName: userName,
           email: email,
           password: password,
-        });
+		});
+		
+		$("#modal1").modal("close");
+		window.location.href = "checkbox.html"
+		
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-        $("#modal1").modal("close");
-        window.location.href = "checkbox.html"
+            // Store the username as a cookie using "document.cookie"
+            document.cookie = "username=" + userName + ";";
+
+            // Print all the cookies
+            console.log(userName);
+            console.log(document.cookie);
+
+            // Recover the name by passing the cookie list through a function that breaks it down
+            var cookieName = readCookie("username");
+            console.log(cookieName); 
 
       }
 
@@ -135,13 +147,16 @@ $(".dropdown-trigger").dropdown();
 
 	//read checkboxes and push values into genreSelections array
 	$(".checks").on("click", function () {
+		console.log("Is this working?")
 		var x = $(this).attr("value");
 		genreSelections.push(x);
 	})
 
 	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
 	$("#formSubmit").on("click", function () {
-		database.ref("/user-data/" + userName + "/genreselections").set({
+		var userCookie = readCookie("username")
+		console.log(userCookie)
+		database.ref("/user-data/" + userCookie + "/genreselections").set({
 			genreSelections: genreSelections
 		})
 	})
@@ -226,9 +241,6 @@ $(".dropdown-trigger").dropdown();
 
 			});
 
-			
-
-
 		});
 
 	}
@@ -255,5 +267,3 @@ $(".dropdown-trigger").dropdown();
 	console.log(userName)
 
 })
-
-
