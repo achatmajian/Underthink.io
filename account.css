@@ -1,0 +1,14 @@
+.buttonFormat {
+    width: 100%;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row .col {
+    float: none;
+    margin: 0 auto;
+    
+}

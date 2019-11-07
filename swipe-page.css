@@ -27,7 +27,6 @@ align-items: center;
 
 #buttons{
  display: flex;
-
  justify-content: space-evenly;
   align-items: center;
 
