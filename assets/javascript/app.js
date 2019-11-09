@@ -152,10 +152,10 @@ $(document).ready(function () {
 	$("#formSubmit").on("click", function () {
 		var userCookie = Cookies.get("username");
 		console.log(userCookie)
-		database.ref("/user-data/" + userCookie + "/genreselections").set({
-			genreSelections: genreSelections
+		database.ref("/user-data/" + userCookie + "/genreSelections").set({
+			genreSelections
 		})
-		window.location.href="swipe-page.html"
+		window.location.href = "swipe-page.html";
 	})
 
 	
@@ -167,44 +167,42 @@ $(document).ready(function () {
 	function callSearch() {
 		$("#posterDisplay").empty();
 		$("#moviePlot").empty();
-		$("#card-title").empty();
-
+    $("#card-title").empty();
+    
+    var userCookie = Cookies.get("username");
+    var firebaseGenres = database.ref("/user-data/" + userCookie + "/genreSelections/").once("value").then(function(snapshot){
+      rocks = snapshot.child("genreSelections").val();
+      console.log(rocks)
+    
 		var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
-		var randoms = Math.floor(Math.random() * genreSelections.length)
-		var randomizer = Math.floor(Math.random() * 20);
-		var userCookie = Cookies.get("username");
-		console.log("userCookie = " + userCookie)
-		var genrePath = database.ref("/user-data/" + userCookie + "/genreselections");
-		var genreSelector = genrePath[randoms]
-		console.log("randoms = " + randoms)
-		console.log("genrePath = " + genrePath)
-		var genreCookies = database.ref("user-data/" + userCookie + "/" + genreSelector);
+    var randoms = Math.floor(Math.random() * rocks.length)
+    var randomizer = Math.floor(Math.random() * 20);
 
-		//setting for running the query in the API
-		var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + genreCookies + "&api_key=" + apiKey,
-			"method": "GET",
-			"headers": {},
-			"data": "{}"
-		}
+    //setting for running the query in the API
+    
+    var settings = {
+      "async": true,
+      "crossDomain": true,
 
+      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&api_key=" + apiKey,
+
+      "method": "GET",
+      "headers": {},
+      "data": "{}"
+    }
 
 		$.ajax(settings).done(function (response) {
-			
+      console.log(response)
 			var results = response.results;
 			
-      var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer]
-      // .poster_path;
-      var moviePlot = results[randomizer]
-      // .overview;
+      var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path
+      console.log(picURL)
+      var moviePlot = results[randomizer].overview
+      console.log(moviePlot)
 			var moviePic = $("<img>");
-      var movieTitle = results[randomizer]
-      // .original_title;
-      var movieID = results[randomizer]
-      // .id;
-			console.log(results[randomizer])
+      var movieTitle = results[randomizer].original_title
+      var movieID =results[randomizer].id
+    
 			moviePic.attr("src", picURL);
 			moviePic.attr("alt", "title image");
 
@@ -251,7 +249,7 @@ $(document).ready(function () {
 			});
 
 		});
-
+})
 	}
 		//Like a movie and save it for later
 			$("#likeButton").on("click", function () {
