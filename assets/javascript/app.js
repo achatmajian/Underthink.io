@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-$(".dropdown-trigger").dropdown();
+//$(".dropdown-trigger").dropdown();
 
     var firebaseConfig = {
         apiKey: "AIzaSyAFyPMp9Jx66lewKt-mdsNUJsY1DpFbfCQ",
@@ -66,7 +66,7 @@ $(".dropdown-trigger").dropdown();
             console.log(document.cookie);
 
             // Recover the name by passing the cookie list through a function that breaks it down
-            var cookieName = readCookie("username");
+            var cookieName = document.cookie;
             console.log(cookieName);
           }
           else{
@@ -141,6 +141,12 @@ $(".dropdown-trigger").dropdown();
 
   });
 
+  //drop down menu in upper right hand corner functionality
+
+  $("#savedPath").on("click", function() {
+	  window.location.href = "savedmovies.html"
+  })
+
 	//Functionality in the preliminary genre checkbox screen
 	var genreSelections = [];
 	var savedMovies = [];
@@ -150,15 +156,18 @@ $(".dropdown-trigger").dropdown();
 		console.log("Is this working?")
 		var x = $(this).attr("value");
 		genreSelections.push(x);
+		console.log(genreSelections)
 	})
 
 	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
 	$("#formSubmit").on("click", function () {
-		var userCookie = readCookie("username")
+		var userCookie = getCookie("username");
+		console.log("clicked")
 		console.log(userCookie)
 		database.ref("/user-data/" + userCookie + "/genreselections").set({
 			genreSelections: genreSelections
 		})
+		window.location.href = "swipe-page.html"
 	})
 
 	callSearch();
@@ -207,39 +216,39 @@ $(".dropdown-trigger").dropdown();
 			$("#moviePlot").append(moviePlot);
 			$("#card-title").append(movieTitle);
 
-			var getIMDBsettings = {
-				"async": true,
-				"crossDomain": true,
-				"url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
-				"method": "GET",
-				"headers": {},
-				"data": "{}"
-			}
+			// var getIMDBsettings = {
+			// 	"async": true,
+			// 	"crossDomain": true,
+			// 	"url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
+			// 	"method": "GET",
+			// 	"headers": {},
+			// 	"data": "{}"
+			// }
 
-			$.ajax(getIMDBsettings).done(function (imdbResponse) {
+			// $.ajax(getIMDBsettings).done(function (imdbResponse) {
 
-				var imdbID = imdbResponse.imdb_id;
+			// 	var imdbID = imdbResponse.imdb_id;
 
-				var metacriticSettings = {
-					"async": true,
-					"crossDomain": true,
-					"url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
-					"method": "GET",
-					"headers": {
-						"x-rapidapi-host": "imdb8.p.rapidapi.com",
-						"x-rapidapi-key": "ea8d56c7demsh58a2de9c820070ap1858acjsnec3bd46c160d"
-					}
-				}
+			// 	var metacriticSettings = {
+			// 		"async": true,
+			// 		"crossDomain": true,
+			// 		"url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
+			// 		"method": "GET",
+			// 		"headers": {
+			// 			"x-rapidapi-host": "imdb8.p.rapidapi.com",
+			// 			"x-rapidapi-key": "ea8d56c7demsh58a2de9c820070ap1858acjsnec3bd46c160d"
+			// 		}
+			// 	}
 
-				$.ajax(metacriticSettings).done(function (metacriticResponse) {
-					var metascore = metacriticResponse.metaScore;
-					var reviewCount = metacriticResponse.reviewCount;
-					var userScore = metacriticResponse.userScore;
-					var userRatingCount = metacriticResponse.userRatingCount
+			// 	$.ajax(metacriticSettings).done(function (metacriticResponse) {
+			// 		var metascore = metacriticResponse.metaScore;
+			// 		var reviewCount = metacriticResponse.reviewCount;
+			// 		var userScore = metacriticResponse.userScore;
+			// 		var userRatingCount = metacriticResponse.userRatingCount
 
-				});
+			// 	});
 
-			});
+			// });
 
 		});
 
@@ -264,6 +273,6 @@ $(".dropdown-trigger").dropdown();
 		return globalResult;
 	}
 
-	console.log(userName)
+	$("#savedMoviesRow").append(savedMovies);
 
 })
