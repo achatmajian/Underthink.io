@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  $(".dropdown-trigger").dropdown();
+//   $(".dropdown-trigger").dropdown();
 
   var firebaseConfig = {
     apiKey: "AIzaSyAFyPMp9Jx66lewKt-mdsNUJsY1DpFbfCQ",
@@ -25,8 +25,8 @@ $(document).ready(function () {
     $('#modal2').modal('open');
   });
 
-  $('#modal1').modal();
-  $('#modal2').modal();
+//   $('#modal1').modal();
+//   $('#modal2').modal();
 
 
   var firstName = "";
@@ -161,13 +161,15 @@ $(document).ready(function () {
 
 	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
 	$("#formSubmit").on("click", function () {
-		var userCookie = readCookie("username")
+		var userCookie = Cookies.get("username");
 		console.log(userCookie)
 		database.ref("/user-data/" + userCookie + "/genreselections").set({
 			genreSelections: genreSelections
 		})
+		window.location.href="swipe-page.html"
 	})
 
+	
 	callSearch();
 
 
@@ -178,17 +180,22 @@ $(document).ready(function () {
 		$("#moviePlot").empty();
 		$("#card-title").empty();
 
-		console.log("Function called")
-
 		var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
 		var randoms = Math.floor(Math.random() * genreSelections.length)
 		var randomizer = Math.floor(Math.random() * 20);
+		var userCookie = Cookies.get("username");
+		console.log("userCookie = " + userCookie)
+		var genrePath = database.ref("/user-data/" + userCookie + "/genreselections");
+		var genreSelector = genrePath[randoms]
+		console.log("randoms = " + randoms)
+		console.log("genrePath = " + genrePath)
+		var genreCookies = database.ref("user-data/" + userCookie + "/" + genreSelector);
 
 		//setting for running the query in the API
 		var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "https://api.themoviedb.org/3/discover/movie?with_genres=18&api_key=" + apiKey,
+			"url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + genreCookies + "&api_key=" + apiKey,
 			"method": "GET",
 			"headers": {},
 			"data": "{}"
@@ -214,39 +221,39 @@ $(document).ready(function () {
 			$("#moviePlot").append(moviePlot);
 			$("#card-title").append(movieTitle);
 
-			var getIMDBsettings = {
-				"async": true,
-				"crossDomain": true,
-				"url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
-				"method": "GET",
-				"headers": {},
-				"data": "{}"
-			}
+			// var getIMDBsettings = {
+			// 	"async": true,
+			// 	"crossDomain": true,
+			// 	"url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
+			// 	"method": "GET",
+			// 	"headers": {},
+			// 	"data": "{}"
+			// }
 
-			$.ajax(getIMDBsettings).done(function (imdbResponse) {
+			// $.ajax(getIMDBsettings).done(function (imdbResponse) {
 
-				var imdbID = imdbResponse.imdb_id;
+			// 	var imdbID = imdbResponse.imdb_id;
 
-				var metacriticSettings = {
-					"async": true,
-					"crossDomain": true,
-					"url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
-					"method": "GET",
-					"headers": {
-						"x-rapidapi-host": "imdb8.p.rapidapi.com",
-						"x-rapidapi-key": "ea8d56c7demsh58a2de9c820070ap1858acjsnec3bd46c160d"
-					}
-				}
+			// 	var metacriticSettings = {
+			// 		"async": true,
+			// 		"crossDomain": true,
+			// 		"url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
+			// 		"method": "GET",
+			// 		"headers": {
+			// 			"x-rapidapi-host": "imdb8.p.rapidapi.com",
+			// 			"x-rapidapi-key": "ea8d56c7demsh58a2de9c820070ap1858acjsnec3bd46c160d"
+			// 		}
+			// 	}
 
-				$.ajax(metacriticSettings).done(function (metacriticResponse) {
-					var metascore = metacriticResponse.metaScore;
-					var reviewCount = metacriticResponse.reviewCount;
-					var userScore = metacriticResponse.userScore;
-					var userRatingCount = metacriticResponse.userRatingCount
+			// 	$.ajax(metacriticSettings).done(function (metacriticResponse) {
+			// 		var metascore = metacriticResponse.metaScore;
+			// 		var reviewCount = metacriticResponse.reviewCount;
+			// 		var userScore = metacriticResponse.userScore;
+			// 		var userRatingCount = metacriticResponse.userRatingCount
 
-				});
+			// 	});
 
-			});
+			// });
 
 		});
 
