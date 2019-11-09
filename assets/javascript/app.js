@@ -138,83 +138,95 @@ $(".dropdown-trigger").dropdown();
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   })
 
-  //Functionality in the preliminary genre checkbox screen
-  var genreSelections = [];
-  var savedMovies = [];
+  
+	//Functionality in the preliminary genre checkbox screen
+	var genreSelections = [];
+	var savedMovies = [];
 
-  //read checkboxes and push values into genreSelections array
-  $(".checks").on("click", function () {
-    console.log("Is this working?")
-    var x = $(this).attr("value");
-    genreSelections.push(x);
-  })
+	//read checkboxes and push values into genreSelections array
+	$(".checks").on("click", function () {
+		console.log("Is this working?")
+		var x = $(this).attr("value");
+		genreSelections.push(x);
+	})
 
-  //PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
-  $("#formSubmit").on("click", function () {
-    var userCookie = Cookies.get("username");
-    console.log(userCookie)
-    database.ref("/user-data/" + userCookie + "/genreSelections").set({
-      genreSelections
-    }).then(function () {
-      window.location.href = "swipe-page.html";
-    });
-  })
+	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
+	$("#formSubmit").on("click", function () {
+		var userCookie = Cookies.get("username");
+		console.log(userCookie)
+		database.ref("/user-data/" + userCookie + "/genreSelections").set({
+			genreSelections
+		})
+		window.location.href = "swipe-page.html";
+	})
 
-
-  callSearch();
-
+	
+	callSearch();
 
 
-  //function to initiate search based on query parameters/input
-  function callSearch() {
-    $("#posterDisplay").empty();
-    $("#moviePlot").empty();
+
+	//function to initiate search based on query parameters/input
+	function callSearch() {
+		$("#posterDisplay").empty();
+		$("#moviePlot").empty();
     $("#card-title").empty();
-
+    
     var userCookie = Cookies.get("username");
-    var firebaseGenres = database.ref("/user-data/" + userCookie + "/genreSelections/").once("value").then(function (snapshot) {
+    var firebaseGenres = database.ref("/user-data/" + userCookie + "/genreSelections/").once("value").then(function(snapshot){
       rocks = snapshot.child("genreSelections").val();
       console.log(rocks)
+    
+		var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
+    var randoms = Math.floor(Math.random() * rocks.length)
+    var randomizer = Math.floor(Math.random() * 20);
 
-      var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
-      var randoms = Math.floor(Math.random() * rocks.length)
-      var randomizer = Math.floor(Math.random() * 20);
+    //setting for running the query in the API
+    
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&api_key=" + apiKey,
+      "method": "GET",
+      "headers": {},
+      "data": "{}"
+    }
 
-      //setting for running the query in the API
+		$.ajax(settings).done(function (response) {
+      console.log(response)
+			var results = response.results;
+			
+      var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path
+      console.log(picURL)
+      var moviePlot = results[randomizer].overview
+      console.log(moviePlot)
+			var moviePic = $("<img>");
+      var movieTitle = results[randomizer].original_title
+      var movieID =results[randomizer].id
+    
+			moviePic.attr("src", picURL);
+			moviePic.attr("alt", "title image");
 
-      var settings = {
-        "async": true,
-        "crossDomain": true,
+			setResults(results[randomizer]);
 
-        "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&api_key=" + apiKey,
+			$("#posterDisplay").append(moviePic);
+			$("#moviePlot").append(moviePlot);
+			$("#card-title").append(movieTitle);
 
-        "method": "GET",
-        "headers": {},
-        "data": "{}"
-      }
+			var getIMDBsettings = {
+				"async": true,
+				"crossDomain": true,
+				"url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
+				"method": "GET",
+				"headers": {},
+				"data": "{}"
+			}
 
-      $.ajax(settings).done(function (response) {
-        console.log(response)
-        var results = response.results;
+			$.ajax(getIMDBsettings).done(function (imdbResponse) {
 
-        var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path
-        console.log(picURL)
-        var moviePlot = results[randomizer].overview
-        console.log(moviePlot)
-        var moviePic = $("<img>");
-        var movieTitle = results[randomizer].original_title
-        var movieID = results[randomizer].id
+				var imdbID = imdbResponse.imdb_id;
 
-        moviePic.attr("src", picURL);
-        moviePic.attr("alt", "title image");
+				var metacriticSettings = {
 
-        setResults(results[randomizer]);
-
-        $("#posterDisplay").append(moviePic);
-        $("#moviePlot").append(moviePlot);
-        $("#card-title").append(movieTitle);
-
-        var getIMDBsettings = {
           "async": true,
           "crossDomain": true,
           "url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
@@ -261,7 +273,6 @@ $(".dropdown-trigger").dropdown();
 
     callSearch();
   })
-
 
 		});
 })
