@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-// $(".dropdown-trigger").dropdown();
+$(".dropdown-trigger").dropdown();
 
   var firebaseConfig = {
     apiKey: "AIzaSyAFyPMp9Jx66lewKt-mdsNUJsY1DpFbfCQ",
