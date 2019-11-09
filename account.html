@@ -13,8 +13,9 @@
     <!-- css -->
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
     <!-- our CSS -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="account.css">
 
     <!-- Materialize Icons-->
 
@@ -42,7 +43,6 @@
 <body>
     <!-- Dropdown Structure -->
 
-
     <ul id="dropdown1" class="dropdown-content">
         <li><a href="account.html">Account</a></li>
         <li><a href="index.html" id="signOut">Sign Out</a></li>
@@ -65,29 +65,52 @@
         </br>
     </div>
 
-
     <div class="container">
-        <div class="row" style="text-align: center;">
-            <div class="col s12">
-                <a class="waves-effect waves-light btn purple darken-2" id="love-saved-button">love</a>
-                <a class="waves-effect waves-light btn purple darken-2" id="like-saved-button">like</a>
-                <a class="waves-effect waves-light btn purple darken-2" id="watched-saved-button">watched</a>
-            </div>
-        </div>
+        <div class="row center">
+            <div class="col s12 m8 l8">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title" style="text-align: center;">My Account</span>
+                        <table>
+                            <!-- <thead>
+                            </thead> -->
 
-        <div class="row" style="text-align: center;">
-            <div class="col s3">
-                <div class="card" id="saved-movie">
-                    <div class="card-image">
-                        <img
-                            src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg">
+                            <tbody>
+                                <tr>
+                                    <td><b>Username</b></td>
+                                    <td id="userName"></td>
+                                
+                                </tr>
+                                <tr>
+                                    <td><b>Name</b></td>
+                                    <td id="fullName"></td>
+                                 
+                                </tr>
+                                <tr>
+                                    <td><b>Email</b></td>
+                                    <td id="email"></td>
+                                  
+                                </tr>
+                                <tr>
+                                    <td><b>Password</b></td>
+                                    <td id="password"></td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-action">
+                            <a class="waves-effect waves-light btn purple darken-2 buttonFormat"
+                            id="updateInfo">Update Info</a>
                     </div>
                 </div>
             </div>
+
         </div>
-
-
     </div>
+
+
+
 
 </body>
 

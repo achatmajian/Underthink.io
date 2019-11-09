@@ -1,25 +1,25 @@
+$(document).ready(function () {
 
-$(document).ready(function(){
+  $(".dropdown-trigger").dropdown();
 
-$(".dropdown-trigger").dropdown();
+  var firebaseConfig = {
+    apiKey: "AIzaSyAFyPMp9Jx66lewKt-mdsNUJsY1DpFbfCQ",
+    authDomain: "underthink-io.firebaseapp.com",
+    databaseURL: "https://underthink-io.firebaseio.com",
+    projectId: "underthink-io",
+    storageBucket: "underthink-io.appspot.com",
+    messagingSenderId: "1068499860720",
+    appId: "1:1068499860720:web:6bb99b9ce3421a635d9635",
+    measurementId: "G-EWEGXJ3FEL"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
 
-    var firebaseConfig = {
-        apiKey: "AIzaSyAFyPMp9Jx66lewKt-mdsNUJsY1DpFbfCQ",
-        authDomain: "underthink-io.firebaseapp.com",
-        databaseURL: "https://underthink-io.firebaseio.com",
-        projectId: "underthink-io",
-        storageBucket: "underthink-io.appspot.com",
-        messagingSenderId: "1068499860720",
-        appId: "1:1068499860720:web:6bb99b9ce3421a635d9635",
-        measurementId: "G-EWEGXJ3FEL"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      firebase.analytics();
-    
-      var database = firebase.database();
+  var database = firebase.database();
 
-       // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+
   $('.view').click(function () {
     $('#modal1').modal('open');
     $('#modal2').modal('open');
@@ -35,9 +35,10 @@ $(".dropdown-trigger").dropdown();
   var email = "";
   var password = "";
 
+
   // On click log in button, checks to make sure user in the in the system
   // Checks credentials
-  $("#log_in").click(function(){
+  $("#log_in").click(function () {
     userNameLogin = $("#username-login-input").val().trim();
     passwordLogin = $("#password-login-input").val().trim();
 
@@ -45,17 +46,17 @@ $(".dropdown-trigger").dropdown();
     // console.log(passwordLogin)
 
     var ref = database.ref("/user-data");
-    ref.once("value").then(function(snapshot){
+    ref.once("value").then(function (snapshot) {
       console.log(userNameLogin)
       var a = snapshot.child(userNameLogin).exists();
       console.log(a)
-      if(a){
-        firebase.database().ref("/user-data/"+userNameLogin).once("value").then(function(snapshot){
+      if (a) {
+        firebase.database().ref("/user-data/" + userNameLogin).once("value").then(function (snapshot) {
           var b = snapshot.child("userName").val();
           var c = snapshot.child("password").val();
           console.log(b);
           console.log(c);
-          if(b === userNameLogin && c === passwordLogin){
+          if (b === userNameLogin && c === passwordLogin) {
             window.location.href = "swipe-page.html";
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
@@ -70,22 +71,22 @@ $(".dropdown-trigger").dropdown();
             var cookieName = readCookie("username");
             console.log(cookieName);
           }
-          else{
-            $("#username-login-input").css("color","red")
-            $("#username-login-label").css("color","red")
-            $("#password-login-input").css("color","red")
-            $("#password-login-label").css("color","red")
+          else {
+            $("#username-login-input").css("color", "red")
+            $("#username-login-label").css("color", "red")
+            $("#password-login-input").css("color", "red")
+            $("#password-login-label").css("color", "red")
             $("#error").text("Your username or password is incorrect")
-            $("#error").css("color","red")
+            $("#error").css("color", "red")
           }
         })
       }
-      else if(!a){
-        $("#username-login-input").css("color","red")
-        $("#username-login-label").css("color","red")
+      else if (!a) {
+        $("#username-login-input").css("color", "red")
+        $("#username-login-label").css("color", "red")
         $("#username-login-label").text("username does not exist")
       }
-    })  
+    })
   })
 
 
@@ -106,8 +107,8 @@ $(".dropdown-trigger").dropdown();
       if (snapshot.child(userName).exists()) {
         console.log("exists!");
         console.log(userName)
-        $("#username-input").css("color","red")
-        $("#username-label").css("color","red")
+        $("#username-input").css("color", "red")
+        $("#username-label").css("color", "red")
         $("#username-label").text("username already in use")
       }
       else {
@@ -118,10 +119,23 @@ $(".dropdown-trigger").dropdown();
           userName: userName,
           email: email,
           password: password,
-        });
+		});
+		
+		$("#modal1").modal("close");
+		window.location.href = "checkbox.html"
+		
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-        $("#modal1").modal("close");
-        window.location.href = "checkbox.html"
+            // Store the username as a cookie using "document.cookie"
+            document.cookie = "username=" + userName + ";";
+
+            // Print all the cookies
+            console.log(userName);
+            console.log(document.cookie);
+
+            // Recover the name by passing the cookie list through a function that breaks it down
+            var cookieName = readCookie("username");
+            console.log(cookieName); 
 
       }
 
@@ -129,19 +143,27 @@ $(".dropdown-trigger").dropdown();
 
   });
 
+   //Signout
+  $("#signOut").click(function () {
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  })
+  
 	//Functionality in the preliminary genre checkbox screen
 	var genreSelections = [];
 	var savedMovies = [];
 
 	//read checkboxes and push values into genreSelections array
 	$(".checks").on("click", function () {
+		console.log("Is this working?")
 		var x = $(this).attr("value");
 		genreSelections.push(x);
 	})
 
 	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
 	$("#formSubmit").on("click", function () {
-		database.ref("/user-data/" + userName + "/genreselections").set({
+		var userCookie = readCookie("username")
+		console.log(userCookie)
+		database.ref("/user-data/" + userCookie + "/genreselections").set({
 			genreSelections: genreSelections
 		})
 	})
@@ -226,9 +248,6 @@ $(".dropdown-trigger").dropdown();
 
 			});
 
-			
-
-
 		});
 
 	}
@@ -248,12 +267,11 @@ $(".dropdown-trigger").dropdown();
 		globalResult = results;
 	}
 
-	function getResult(){
-		return globalResult;
-	}
+  function getResult() {
+    return globalResult;
+  }
 
-	console.log(userName)
+  console.log(userName)
+
 
 })
-
-

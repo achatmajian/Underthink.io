@@ -39,3 +39,7 @@ align-items: center;
 .center {
     align-items: center;
 }
+
+.brand-logo {
+    margin-left: 25px;
+}
