@@ -211,10 +211,6 @@ $(".dropdown-trigger").dropdown();
 
 			setResults(results[randomizer]);
 
-			$("#posterDisplay").append(moviePic);
-			$("#moviePlot").append(moviePlot);
-			$("#card-title").append(movieTitle);
-
 			var getIMDBsettings = {
 				"async": true,
 				"crossDomain": true,
@@ -222,21 +218,7 @@ $(".dropdown-trigger").dropdown();
 				"method": "GET",
 				"headers": {},
 				"data": "{}"
-			}
-
-			$.ajax(getIMDBsettings).done(function (imdbResponse) {
-
-				var imdbID = imdbResponse.imdb_id;
-
-				var metacriticSettings = {
-
-          "async": true,
-          "crossDomain": true,
-          "url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
-          "method": "GET",
-          "headers": {},
-          "data": "{}"
-        }
+			}		
 
         $.ajax(getIMDBsettings).done(function (imdbResponse) {
 
@@ -259,17 +241,20 @@ $(".dropdown-trigger").dropdown();
             var reviewCount = metacriticResponse.reviewCount;
             var userScore = metacriticResponse.userScore;
             var userRatingCount = metacriticResponse.userRatingCount
-          });
+         
 
-
-
+          $("#posterDisplay").append(moviePic);
+          $("#moviePlot").append(moviePlot);
+          $("#card-title").append(movieTitle);
+          $("#moviePlot").append("</br>Metacritic score: " + metascore + " out of " + reviewCount + " total reviews.");
+          $("#moviePlot").append("</br>IMDB User Rating: " + userScore + " out of " + userRatingCount + " total reviews.")
+ });
         });
 
-      });
     })
   
 })
-	}
+  }
 		//Like a movie and save it for later
 			$("#likeButton").on("click", function () {
         var userCookie = Cookies.get("username");
