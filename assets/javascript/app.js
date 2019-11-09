@@ -150,15 +150,18 @@ $(document).ready(function () {
 		genreSelections.push(x);
 	})
 
-	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
-	$("#formSubmit").on("click", function () {
-		var userCookie = Cookies.get("username");
-		console.log(userCookie)
-		database.ref("/user-data/" + userCookie + "/genreSelections").set({
-			genreSelections
-		})
-      window.location.href = "swipe-page.html";
-	})
+  //PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
+  $("#formSubmit").on("click", function () {
+    var userCookie = Cookies.get("username");
+    console.log(userCookie)
+    database.ref("/user-data/" + userCookie + "/genreSelections").set({
+      genreSelections
+    }).then(function(){
+      database.ref("/user-data/" + userCookie + "/genreSelections").once("value").then(function(){
+        window.location.href = "swipe-page.html";  
+      })
+    })
+  })
 
 	
 	callSearch();
