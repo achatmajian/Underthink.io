@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-$(".dropdown-trigger").dropdown();
+// $(".dropdown-trigger").dropdown();
 
   var firebaseConfig = {
     apiKey: "AIzaSyAFyPMp9Jx66lewKt-mdsNUJsY1DpFbfCQ",
@@ -156,8 +156,9 @@ $(".dropdown-trigger").dropdown();
 		console.log(userCookie)
 		database.ref("/user-data/" + userCookie + "/genreSelections").set({
 			genreSelections
-		})
-		window.location.href = "swipe-page.html";
+		}).then(function(){
+      window.location.href = "swipe-page.html";
+    })
 	})
 
 	
@@ -264,7 +265,7 @@ $(".dropdown-trigger").dropdown();
 
       });
     })
-  }
+  
   //Like a movie and save it for later
   $("#likeButton").on("click", function () {
 
@@ -274,7 +275,7 @@ $(".dropdown-trigger").dropdown();
     callSearch();
   })
 
-		});
+
 })
 	}
 		//Like a movie and save it for later
