@@ -139,7 +139,6 @@ $(".dropdown-trigger").dropdown();
     window.location.href = "index.html"
   })
 
-  
 	//Functionality in the preliminary genre checkbox screen
 	var genreSelections = [];
 	var savedMovies = [];
@@ -189,7 +188,7 @@ $(".dropdown-trigger").dropdown();
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&api_key=" + apiKey,
+      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&vote_average.gte=6&api_key=" + apiKey,
       "method": "GET",
       "headers": {},
       "data": "{}"
