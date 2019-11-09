@@ -152,10 +152,10 @@ $(document).ready(function () {
 	$("#formSubmit").on("click", function () {
 		var userCookie = Cookies.get("username");
 		console.log(userCookie)
-		database.ref("/user-data/" + userCookie + "/genreselections").set({
-			genreSelections: genreSelections
+		database.ref("/user-data/" + userCookie + "/genreSelections").set({
+			genreSelections
 		})
-		window.location.href="swipe-page.html"
+		window.location.href = "swipe-page.html";
 	})
 
 	
@@ -167,29 +167,30 @@ $(document).ready(function () {
 	function callSearch() {
 		$("#posterDisplay").empty();
 		$("#moviePlot").empty();
-		$("#card-title").empty();
-
+    $("#card-title").empty();
+    
+    var userCookie = Cookies.get("username");
+    var firebaseGenres = database.ref("/user-data/" + userCookie + "/genreSelections/").once("value").then(function(snapshot){
+      rocks = snapshot.child("genreSelections").val();
+      console.log(rocks)
+    
 		var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
-		var randoms = Math.floor(Math.random() * genreSelections.length)
-		var randomizer = Math.floor(Math.random() * 20);
-		var userCookie = Cookies.get("username");
-		console.log("userCookie = " + userCookie)
-		var genrePath = database.ref("/user-data/" + userCookie + "/genreselections");
-		var genreSelector = genrePath[randoms]
+    var randoms = Math.floor(Math.random() * rocks.length)
+    var randomizer = Math.floor(Math.random() * 20);
+		var genreSelector = firebaseGenres[randoms]
 		console.log("randoms = " + randoms)
-		console.log("genrePath = " + genrePath)
 		var genreCookies = database.ref("user-data/" + userCookie + "/" + genreSelector);
 
-		//setting for running the query in the API
-		var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + genreCookies + "&api_key=" + apiKey,
-			"method": "GET",
-			"headers": {},
-			"data": "{}"
-		}
-
+    //setting for running the query in the API
+    
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + genreCookies + "&api_key=" + apiKey,
+      "method": "GET",
+      "headers": {},
+      "data": "{}"
+    }
 
 		$.ajax(settings).done(function (response) {
 			
@@ -251,7 +252,7 @@ $(document).ready(function () {
 			});
 
 		});
-
+})
 	}
 		//Like a movie and save it for later
 			$("#likeButton").on("click", function () {
