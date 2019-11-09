@@ -133,6 +133,23 @@ $(".dropdown-trigger").dropdown();
 
   });
 
+  function printAccount(){
+    var userCookie = Cookies.get("username")
+    database.ref("/user-data/" + userCookie).once("value").then(function(snapshot){
+      var accountUserName = snapshot.child("userName").val();
+      var accountEmail = snapshot.child("email").val();
+      var accountFullName = snapshot.child("firstName").val() + snapshot.child("lastName").val()
+      var accountPassWord = snapshot.child("password").val()
+
+      $("#account-userName").text(accountUserName);
+      $("#account-fullName").text(accountFullName);
+      $("#account-email").text(accountEmail);
+      $("#account-password").text(accountPassWord);
+    })
+  }
+
+  printAccount();
+
   //Signout
   $("#signOut").click(function () {
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -141,7 +158,15 @@ $(".dropdown-trigger").dropdown();
 
 	//Functionality in the preliminary genre checkbox screen
 	var genreSelections = [];
-	var savedMovies = [];
+  var savedMovies = getDefaultMovies() || [];
+  function getDefaultMovies(){
+    var userCookie = Cookies.get("username")
+    database.ref("/user-data/" + userCookie + "/savedmovies/").once("value").then(function(snapshot){
+      var saveMovieDetails = snapshot.child("savedMovies").val();
+      return saveMovieDetails
+    })
+    };
+  console.log(savedMovies)
 
 	//read checkboxes and push values into genreSelections array
 	$(".checks").on("click", function () {
@@ -278,6 +303,7 @@ $(".dropdown-trigger").dropdown();
           var userCookie = Cookies.get("username")
           var firebaseSaved = database.ref("/user-data/" + userCookie + "/savedmovies/").once("value").then(function(snapshot){
             var saveMovieDetails = snapshot.child("savedMovies").val();
+      
             console.log(saveMovieDetails[0].poster_path)
           
 
