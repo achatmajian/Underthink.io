@@ -280,14 +280,17 @@ $(".dropdown-trigger").dropdown();
           
 
           for (i = 0; i < saveMovieDetails.length; i++){
-          var moviePic = $("<img>");
+          var savedCol = $("<div>").addClass("col s3");
+          var savedDiv = $("<div>").addClass("saved-card");
+          var moviePic = $("<img>").css("width" ,"100%");
           var moviePlot = saveMovieDetails[i].overview
           var picURL = "https://image.tmdb.org/t/p/w500" + saveMovieDetails[i].poster_path;
           console.log(picURL)
           moviePic.attr("src", picURL);
           moviePic.attr("alt", "title image");
-          $("#saved-row").append(moviePic)
-//          $("#saved-row").append(moviePlot)
+          savedDiv.append(moviePic)
+          savedCol.append(savedDiv)
+          $("#saved-row").append(savedCol)
         }
       })
         }
