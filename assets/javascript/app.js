@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
 $(".dropdown-trigger").dropdown();
 
   var firebaseConfig = {
@@ -108,23 +109,23 @@ $(".dropdown-trigger").dropdown();
           userName: userName,
           email: email,
           password: password,
-		});
-		
-		// $("#modal1").modal("close");
-		window.location.href = "checkbox.html"
-		
-		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        });
 
-            // Store the username as a cookie using "document.cookie"
-            document.cookie = "username=" + userName + ";";
+        // $("#modal1").modal("close");
+        window.location.href = "checkbox.html"
 
-            // Print all the cookies
-            console.log(userName);
-            console.log(document.cookie);
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-            // Recover the name by passing the cookie list through a function that breaks it down
-            var cookieName = readCookie("username");
-            console.log(cookieName); 
+        // Store the username as a cookie using "document.cookie"
+        document.cookie = "username=" + userName + ";";
+
+        // Print all the cookies
+        console.log(userName);
+        console.log(document.cookie);
+
+        // Recover the name by passing the cookie list through a function that breaks it down
+        var cookieName = readCookie("username");
+        console.log(cookieName);
 
       }
 
@@ -132,140 +133,141 @@ $(".dropdown-trigger").dropdown();
 
   });
 
-   //Signout
+  //Signout
   $("#signOut").click(function () {
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   })
-  
-	//Functionality in the preliminary genre checkbox screen
-	var genreSelections = [];
-	var savedMovies = [];
 
-	//read checkboxes and push values into genreSelections array
-	$(".checks").on("click", function () {
-		console.log("Is this working?")
-		var x = $(this).attr("value");
-		genreSelections.push(x);
-	})
+  //Functionality in the preliminary genre checkbox screen
+  var genreSelections = [];
+  var savedMovies = [];
 
-	//PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
-	$("#formSubmit").on("click", function () {
-		var userCookie = Cookies.get("username");
-		console.log(userCookie)
-		database.ref("/user-data/" + userCookie + "/genreSelections").set({
-			genreSelections
-		})
-		window.location.href = "swipe-page.html";
-	})
+  //read checkboxes and push values into genreSelections array
+  $(".checks").on("click", function () {
+    console.log("Is this working?")
+    var x = $(this).attr("value");
+    genreSelections.push(x);
+  })
 
-	
-	callSearch();
-
-
-
-	//function to initiate search based on query parameters/input
-	function callSearch() {
-		$("#posterDisplay").empty();
-		$("#moviePlot").empty();
-    $("#card-title").empty();
-    
+  //PASS THE GENRESELECTIONS ARRAY INTO THE USER OBJECT IN FIREBASE
+  $("#formSubmit").on("click", function () {
     var userCookie = Cookies.get("username");
-    var firebaseGenres = database.ref("/user-data/" + userCookie + "/genreSelections/").once("value").then(function(snapshot){
+    console.log(userCookie)
+    database.ref("/user-data/" + userCookie + "/genreSelections").set({
+      genreSelections
+    }).then(function () {
+      window.location.href = "swipe-page.html";
+    });
+  })
+
+
+  callSearch();
+
+
+
+  //function to initiate search based on query parameters/input
+  function callSearch() {
+    $("#posterDisplay").empty();
+    $("#moviePlot").empty();
+    $("#card-title").empty();
+
+    var userCookie = Cookies.get("username");
+    var firebaseGenres = database.ref("/user-data/" + userCookie + "/genreSelections/").once("value").then(function (snapshot) {
       rocks = snapshot.child("genreSelections").val();
       console.log(rocks)
-    
-		var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
-    var randoms = Math.floor(Math.random() * rocks.length)
-    var randomizer = Math.floor(Math.random() * 20);
 
-    //setting for running the query in the API
-    
-    var settings = {
-      "async": true,
-      "crossDomain": true,
+      var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
+      var randoms = Math.floor(Math.random() * rocks.length)
+      var randomizer = Math.floor(Math.random() * 20);
 
-      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&api_key=" + apiKey,
+      //setting for running the query in the API
 
-      "method": "GET",
-      "headers": {},
-      "data": "{}"
-    }
+      var settings = {
+        "async": true,
+        "crossDomain": true,
 
-		$.ajax(settings).done(function (response) {
-      console.log(response)
-			var results = response.results;
-			
-      var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path
-      console.log(picURL)
-      var moviePlot = results[randomizer].overview
-      console.log(moviePlot)
-			var moviePic = $("<img>");
-      var movieTitle = results[randomizer].original_title
-      var movieID =results[randomizer].id
-    
-			moviePic.attr("src", picURL);
-			moviePic.attr("alt", "title image");
+        "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&api_key=" + apiKey,
 
-			setResults(results[randomizer]);
+        "method": "GET",
+        "headers": {},
+        "data": "{}"
+      }
 
-			$("#posterDisplay").append(moviePic);
-			$("#moviePlot").append(moviePlot);
-			$("#card-title").append(movieTitle);
+      $.ajax(settings).done(function (response) {
+        console.log(response)
+        var results = response.results;
 
-			var getIMDBsettings = {
-				"async": true,
-				"crossDomain": true,
-				"url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
-				"method": "GET",
-				"headers": {},
-				"data": "{}"
-			}
+        var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path
+        console.log(picURL)
+        var moviePlot = results[randomizer].overview
+        console.log(moviePlot)
+        var moviePic = $("<img>");
+        var movieTitle = results[randomizer].original_title
+        var movieID = results[randomizer].id
 
-			$.ajax(getIMDBsettings).done(function (imdbResponse) {
+        moviePic.attr("src", picURL);
+        moviePic.attr("alt", "title image");
 
-				var imdbID = imdbResponse.imdb_id;
+        setResults(results[randomizer]);
 
-				var metacriticSettings = {
+        $("#posterDisplay").append(moviePic);
+        $("#moviePlot").append(moviePlot);
+        $("#card-title").append(movieTitle);
+
+        var getIMDBsettings = {
           "async": true,
           "crossDomain": true,
-          "url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
+          "url": "https://api.themoviedb.org/3/movie/" + movieID + "/external_ids?api_key=" + apiKey,
           "method": "GET",
-          "headers": {
+          "headers": {},
+          "data": "{}"
+        }
+
+        $.ajax(getIMDBsettings).done(function (imdbResponse) {
+
+          var imdbID = imdbResponse.imdb_id;
+
+          var metacriticSettings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://imdb8.p.rapidapi.com/title/get-metacritic?tconst=" + imdbID,
+            "method": "GET",
+            "headers": {
               "x-rapidapi-host": "imdb8.p.rapidapi.com",
               "x-rapidapi-key": "52f358512fmsha5f4fbfea4f16fep1e0befjsn055925cf49c2"
+            }
           }
-      }
-      
-      $.ajax(metacriticSettings).done(function (metacriticResponse) {
-          console.log(metacriticResponse);
-          var metascore = metacriticResponse.metaScore;
-					var reviewCount = metacriticResponse.reviewCount;
-					var userScore = metacriticResponse.userScore;
-					var userRatingCount = metacriticResponse.userRatingCount
+
+          $.ajax(metacriticSettings).done(function (metacriticResponse) {
+            console.log(metacriticResponse);
+            var metascore = metacriticResponse.metaScore;
+            var reviewCount = metacriticResponse.reviewCount;
+            var userScore = metacriticResponse.userScore;
+            var userRatingCount = metacriticResponse.userRatingCount
+          });
+
+
+
+        });
+
       });
+    })
+  }
+  //Like a movie and save it for later
+  $("#likeButton").on("click", function () {
 
-			
+    saveMovie(getResult());
+    console.log(savedMovies);
 
-			});
+    callSearch();
+  })
 
-		});
-})
-	}
-		//Like a movie and save it for later
-			$("#likeButton").on("click", function () {
-
-				saveMovie(getResult());
-				console.log(savedMovies);
-
-				callSearch();
-			})
-
-	function saveMovie(movie){
-		savedMovies.push(movie);
-	}
-	function setResults(results) {
-		globalResult = results;
-	}
+  function saveMovie(movie) {
+    savedMovies.push(movie);
+  }
+  function setResults(results) {
+    globalResult = results;
+  }
 
   function getResult() {
     return globalResult;
