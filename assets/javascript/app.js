@@ -177,35 +177,32 @@ $(document).ready(function () {
 		var apiKey = "da2a72f5163ff2c54a74dab6f5cc5bd3";
     var randoms = Math.floor(Math.random() * rocks.length)
     var randomizer = Math.floor(Math.random() * 20);
-		var genreSelector = firebaseGenres[randoms]
-		console.log("randoms = " + randoms)
-		var genreCookies = database.ref("user-data/" + userCookie + "/" + genreSelector);
 
     //setting for running the query in the API
     
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + genreCookies + "&api_key=" + apiKey,
+
+      "url": "https://api.themoviedb.org/3/discover/movie?with_genres=" + rocks[randoms] + "&api_key=" + apiKey,
+
       "method": "GET",
       "headers": {},
       "data": "{}"
     }
 
 		$.ajax(settings).done(function (response) {
-			
+      console.log(response)
 			var results = response.results;
 			
-      var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer]
-      // .poster_path;
-      var moviePlot = results[randomizer]
-      // .overview;
+      var picURL = "https://image.tmdb.org/t/p/w500" + results[randomizer].poster_path
+      console.log(picURL)
+      var moviePlot = results[randomizer].overview
+      console.log(moviePlot)
 			var moviePic = $("<img>");
-      var movieTitle = results[randomizer]
-      // .original_title;
-      var movieID = results[randomizer]
-      // .id;
-			console.log(results[randomizer])
+      var movieTitle = results[randomizer].original_title
+      var movieID =results[randomizer].id
+    
 			moviePic.attr("src", picURL);
 			moviePic.attr("alt", "title image");
 
