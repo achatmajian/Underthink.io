@@ -7,16 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Underthink.io</title>
 
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-  
-
-
-
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
- 
   <!-- CSS -->
   <link rel="stylesheet" href="index.css">
 
@@ -24,25 +20,47 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
 
-<!-- jQuery -->
+  <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <!-- Our JavaScript file  -->
   <script src="assets/javascript/app.js"></script>
-  
+
   <!-- TODO: Add SDKs for Firebase products that you want to use
        https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
-
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
 
+  <script type="text/javascript">
+    (function ($) {
+      $(function () {
+
+        //initialize all modals           
+        $('.modal').modal();
+
+        //now you can open modal from code
+        $('#modal1').modal();
+        $('#modal2').modal();
+
+      });
+    })(jQuery);
+  </script>
 
 </head>
 
@@ -79,40 +97,40 @@
                   <p>text about underthink</p>
                 </div>
                 <div class="card-action center" id="buttons">
-                  <a class="waves-effect waves-light btn purple darken-2" style="color: white;" onclick="$('#modal2').modal('open');" id="log-in-button">Log
-                    In</a>
                   <a class="waves-effect waves-light btn purple darken-2" style="color: white;"
-                    onclick="$('#modal1').modal('open');">Sign Up Now</a>
-                  
-                    <!-- Log In Modal -->
-                    <div id="modal2" class="modal">
-                      <div class="modal-content">
-  
-                        <div class="row">
-                          <form class="col s12">
-                            <div class="row">
-                              <div class="input-field col s12">
-                                <input id="username-login-input" type="text" class="validate">
-                                <label for="username-login-input" id="username-login-label">Username</label>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="input-field col s12">
-                                <input id="password-login-input" type="password" class="validate">
-                                <label for="password-login-input" id="password-login-label">Password</label>
-                              </div>
-                            </div>
-                            <p id="error"></p>
-                          </form>
-                        </div>
-  
-                      </div>
-                      <div class="modal-footer">
-                        <a href="#!" class=" modal-action waves-effect waves-green btn-flat" id="log_in">Log In</a>
-                      </div>
-                    </div>
-                    <!-- Sign Up Modal -->
+                    onclick="$('#modal1').modal('open');" id="log-in-button">Log In</a>
+                  <a class="waves-effect waves-light btn purple darken-2" style="color: white;"
+                    onclick="$('#modal2').modal('open');" id="sign-up-button">Sign Up Now</a>
+
+                  <!-- Log In Modal -->
                   <div id="modal1" class="modal">
+                    <div class="modal-content">
+
+                      <div class="row">
+                        <form class="col s12">
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="username-login-input" type="text" class="validate">
+                              <label for="username-login-input" id="username-login-label">Username</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="password-login-input" type="password" class="validate">
+                              <label for="password-login-input" id="password-login-label">Password</label>
+                            </div>
+                          </div>
+                          <p id="error"></p>
+                        </form>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#!" class=" modal-action waves-effect waves-green btn-flat" id="log_in">Log In</a>
+                    </div>
+                  </div>
+                  <!-- Sign Up Modal -->
+                  <div id="modal2" class="modal">
                     <div class="modal-content">
 
                       <div class="row">
@@ -157,17 +175,11 @@
               </div>
             </div>
           </div>
-          <div>
-            <!-- Image Card Close -->
-          </div>
         </div>
-
-
-
-
-
-
-
+        <!-- Image Card Close -->
+      </div>
+    </div>
+  </div>
 
 </body>
 
