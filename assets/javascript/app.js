@@ -270,6 +270,9 @@ $(".dropdown-trigger").dropdown();
         
         })
 
+        $("#hateButton").on("click", function() {
+          callSearch();
+        })
         generateSaved();
 
         function generateSaved(){
