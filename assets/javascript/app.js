@@ -156,9 +156,8 @@ $(document).ready(function () {
 		console.log(userCookie)
 		database.ref("/user-data/" + userCookie + "/genreSelections").set({
 			genreSelections
-		}).then(function(){
+		})
       window.location.href = "swipe-page.html";
-    })
 	})
 
 	
@@ -266,16 +265,6 @@ $(document).ready(function () {
       });
     })
   
-  //Like a movie and save it for later
-  $("#likeButton").on("click", function () {
-
-    saveMovie(getResult());
-    console.log(savedMovies);
-
-    callSearch();
-  })
-
-
 })
 	}
 		//Like a movie and save it for later
@@ -288,6 +277,7 @@ $(document).ready(function () {
         database.ref("/user-data/" + userCookie + "/savedmovies").set({
           savedMovies
         })
+        callSearch();
         
         })
 
