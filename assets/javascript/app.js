@@ -262,18 +262,56 @@ $(".dropdown-trigger").dropdown();
     callSearch();
   })
 
-  function saveMovie(movie) {
-    savedMovies.push(movie);
-  }
-  function setResults(results) {
-    globalResult = results;
-  }
+
+		});
+})
+	}
+		//Like a movie and save it for later
+			$("#likeButton").on("click", function () {
+        var userCookie = Cookies.get("username");
+
+        saveMovie(getResult());
+        console.log(savedMovies);
+        
+        database.ref("/user-data/" + userCookie + "/savedmovies").set({
+          savedMovies
+        })
+        
+        })
+
+        generateSaved();
+
+        function generateSaved(){
+          var userCookie = Cookies.get("username")
+          var firebaseSaved = database.ref("/user-data/" + userCookie + "/savedmovies/").once("value").then(function(snapshot){
+            var saveMovieDetails = snapshot.child("savedMovies").val();
+            console.log(saveMovieDetails[0].poster_path)
+          
+
+          for (i = 0; i < saveMovieDetails.length; i++){
+          var moviePic = $("<img>");
+          var moviePlot = saveMovieDetails[i].overview
+          var picURL = "https://image.tmdb.org/t/p/w500" + saveMovieDetails[i].poster_path;
+          console.log(picURL)
+          moviePic.attr("src", picURL);
+          moviePic.attr("alt", "title image");
+          $("#saved-row").append(moviePic)
+//          $("#saved-row").append(moviePlot)
+        }
+      })
+        }
+
+	function saveMovie(movie){
+		savedMovies.push(movie);
+	}
+	function setResults(results) {
+		globalResult = results;
+	}
+
 
   function getResult() {
     return globalResult;
   }
-
-  console.log(userName)
 
 
 })
