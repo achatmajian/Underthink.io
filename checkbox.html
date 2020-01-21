@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Underthink</title>
+
+    <!-- css -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Materialize Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+</head>
+
+<body>
+    <!-- Dropdown Structure -->
+
+    <ul id="dropdown1" class="dropdown-content">
+            <li><a href="account.html">Account</a></li>
+            <li><a href="index.html" id="signOut">Sign Out</a></li>
+        </ul>
+        <nav>
+            <div class="nav-wrapper purple darken-2">
+                <a href="index.html" class="brand-logo" style="margin-left: 25px;">Underthink</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="swipe-page.html">Discover</a></li>
+                    <li><a href="savedmovies.html">Saved</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Profile<i
+                                class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div>
+            </br>
+            </br>
+            </br>
+        </div>
+
+    <div class="container">
+        <div>
+            <p style="text-align: center">
+                Let us know what you're interested in...
+                </br>
+                </br>
+                </br>
+            </p>
+        </div>
+        <form action="#" style="text-align: left-align">
+            <div class="row">
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="12" />
+                        <span id="adventure">Adventure</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="16" />
+                        <span id="animation">Animation</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="35" />
+                        <span id="comedy">Comedy</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="80" />
+                        <span id="crime">Crime</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="99" />
+                        <span id="documentary">Documentary</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="18" />
+                        <span id="drama">Drama</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="10751" />
+                        <span id="family">Family</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="14" />
+                        <span id="fantasy">Fantasy</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="36" />
+                        <span id="history">History</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="27" />
+                        <span id="horror">Horror</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="9648" />
+                        <span id="mystery">Mystery</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="10749" />
+                        <span id="romance">Romance</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="878" />
+                        <span id="science-fiction">Science Fiction</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="53" />
+                        <span id="thriller">Thriller</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="10752" />
+                        <span id="war">War</span>
+                    </label>
+                </div>
+                <div class="col s12 m6 l3">
+                    <label>
+                        <input type="checkbox" class="checks" value="37" />
+                        <span id="western">Western</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-light purple darken-2" type="submit" name="action"
+                    id="formSubmit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+</html>

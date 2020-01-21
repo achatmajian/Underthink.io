@@ -1,0 +1,45 @@
+/* Index Page Styling */
+
+.brand-logo {
+    margin-left: 25px;
+}
+
+#card-container{
+display: grid;
+justify-items: center;
+align-items: center;
+
+
+}
+
+
+.row .col {
+    float: none;
+    margin: 0 auto;
+    
+}
+
+#buttons{
+ display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, 180px);
+  align-items: center;
+  margin: auto;
+  
+ 
+}
+
+.card {
+    width:100%;
+    
+   }
+
+
+
+.center {
+    align-items: center;
+}
+
+.brand-logo {
+    margin-left: 25px;
+}

@@ -1,0 +1,82 @@
+/* Swipe Page Styling */
+
+.brand-logo {
+    margin-left: 25px;
+}
+
+#card-container{
+display: grid;
+justify-items: center;
+align-items: center;
+
+
+}
+
+#movie-card{
+display: grid;
+justify-items: center;
+align-items: center;
+
+}
+
+.row .col {
+    float: none;
+    margin: 0 auto;
+    
+}
+
+#buttons{
+ display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, 180px);
+  align-items: center;
+  
+ 
+}
+
+.card {
+    width:100%;
+    
+   }
+
+img {
+    height: 400px;
+    width: 400px;
+}
+
+#arrows{
+    font-size: 60px;
+}
+
+/* Movie Details Page Styling */
+
+
+.card {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 50px;
+   
+    width: 90%; 
+}
+
+.card-content{
+    margin: 0;
+}
+
+.card-action{
+    margin-bottom: -60px;
+
+}
+
+table { 
+    border-collapse: collapse;
+    width: 30%;
+}
+
+tr {
+    border: 0;
+
+}
+
