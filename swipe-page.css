@@ -1,0 +1,47 @@
+/* Swipe Page Styling */
+
+.brand-logo {
+    margin-left: 25px;
+}
+
+#card-container{
+display: flex;
+justify-items: center;
+align-items: center;
+}
+
+#movie-card{
+display: flex;
+justify-items: center;
+align-items: center;
+height: auto;
+
+}
+
+.row .col {
+    float: none;
+    margin: 0 auto;
+    
+}
+
+#buttons{
+ display: flex;
+ justify-content: space-evenly;
+  align-items: center;
+
+  
+ 
+}
+
+.card{
+    margin: 30px;
+    max-width: 100%;
+    height: auto;
+
+}
+
+#arrows{
+    font-size: 60px;
+}
+
+
